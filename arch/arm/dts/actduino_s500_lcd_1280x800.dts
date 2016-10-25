@@ -24,7 +24,7 @@
     
 	reserved {
 		tiny {
-			fb_heap_size = <4>;
+			fb_heap_size = <8>;
 			kinfo_heap_size = <1>;
 			carveout_heap_size = <40>;
 			dma_heap_size = <128>;
@@ -268,8 +268,8 @@
 
 	framebuffer {
 		compatible = "actions,framebuffer";
-		def_display  = "dsi";
-		bpp = <4>; 
+		def_display  = "hdmi";
+		bpp = <8>; 
 	};
 
 		
@@ -323,9 +323,11 @@
 	};
 
 	hdmi:hdmi@b02c0000{
+		status = "okay";
 		hdcp_onoff = <0>;
 		channel_invert = <0>;
 		bit_invert = <0>;
+		hotplugable = <0>;
 		bootable = <1>; 
 		i2cbus = <3>;
 		bootrotate = <0>;   

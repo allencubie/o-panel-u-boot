@@ -52,7 +52,7 @@ struct owl_display {
 static struct owl_display display_list[MAX_NUM_DISP_DEV];
 static u32 registered_display_ids;
 
-static int get_memory_size(void)
+static unsigned int get_memory_size(void)
 {
 	int index = (readl(0xb0290028) & (0x7 << 8)) >> 8;
 	return (((index+1)*256)<<20);
