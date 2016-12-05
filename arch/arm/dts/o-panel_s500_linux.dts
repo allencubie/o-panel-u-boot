@@ -253,7 +253,7 @@
 	};
 
 	mmc@b0234000 {
-		status = "disabled";
+		status = "okay";
 	};
 
 	mmc@b0238000 {
@@ -268,8 +268,8 @@
 
 	framebuffer {
 		compatible = "actions,framebuffer";
-		def_display  = "hdmi";
-		bpp = <8>; 
+		def_display  = "dsi";
+		bpp = <4>; 
 	};
 
 		
@@ -280,50 +280,53 @@
 	dsi: dsi@b0220000 {
 		pinctrl-names = "default";
 		pinctrl-0 = <&dsi_state_default>;
-		dsi_power_gpios = <&gpio 126 1>;    /*GPIOD30*/
+		dsi_power_gpios = <&gpio 23 0>;    /*hr280ac GPIOA23*/
+		dsi_reset_gpios = <&gpio 115 0>;   /*S500 GPIOD19*/	
 		port_type = "dsi";	 
 		data_width = <0>;
 		videomode-0 = <&dsi_mode>;
 		hw-set = <&dsi_reg>;
 
-		dsi_reg:val{													
+		dsi_reg:val{	
 			dsi_ctrl =< 0x1340>;
-			dsi_size = <0x3200000>;
+			dsi_size = <0x3000000>;
 			dsi_color = <0xff0000>;
-			dsi_rgbht0 = <0x7878>;
+			dsi_rgbht0 = <0x150b4>;
 			dsi_rgbht1 = <0x3e8>;
-			dsi_rgbvt0 = <0x1f0c32c>;
-			dsi_rgbvt1 =<0xa>;
+			dsi_rgbvt0 = <0x1f0a319>;
+			dsi_rgbvt1 =<0x15>;
 			dsi_pack_cfg = <0x0>;
-			dsi_pack_header =<0xf00>;
+			dsi_pack_header =<0x1008>;
 			dsi_vedio_cfg = <0x30c>;
-			dsi_phy_t0 = <0xa5a>;
-			dsi_phy_t1 =<0x1b12>;
-			dsi_phy_t2 = <0x2f05>;
+			dsi_phy_t0 = <0x125b>;
+			dsi_phy_t1 =<0x1b0b>;
+			dsi_phy_t2 = <0x2f06>;
 			dsi_phy_ctrl = <0xfc94>;
 			dsi_pin_map = <0x688>;
-			cmu_dsipll_clk = <0x12601>;
+			cmu_dsipll_clk = <0x12b01>;
+
+
 		};
 		
-		dsi_mode:mode@800x1280p60 {
+		dsi_mode:mode@1368x768p60 {
 			refresh = <60>;
-			xres = <1280>;
-			yres = <800>;
+			xres = <1368>;    // cannot set to 1366, it must a nultiple of 8,
+			yres = <768>;
 			/*in pico second, 0.000 000 000 001s*/
-			pixclock = <15000>;
-			left_margin = <10>;
-			right_margin = <10>;
-			upper_margin = <3>;
-			lower_margin = <3>;
-			hsync_len = <30>;
-			vsync_len = <6>;
+			pixclock = <14430>; // maybe can try 14285
+			left_margin = <40>;
+			right_margin = <28>;
+			upper_margin = <15>;
+			lower_margin = <5>;
+			hsync_len = <20>;
+			vsync_len = <5>;
 			/*0: FB_VMODE_NONINTERLACED, 1:FB_VMODE_INTERLACED*/
 			vmode = <0>;
 		};
 	};
 
 	hdmi:hdmi@b02c0000{
-		status = "okay";
+		status = "disabled";
 		hdcp_onoff = <0>;
 		channel_invert = <0>;
 		bit_invert = <0>;
@@ -360,7 +363,7 @@
 	ethernet@b0310000 {
 		compatible = "actions,owl-ethernet";
 		phy_addr = <1>;
-		status = "okay";
+		status = "disabled";
 		phy-power-gpios = <&gpio 85 0>;
 		phy-reset-gpios = <&gpio 84 1>;
 	};
@@ -368,7 +371,7 @@
 	backlight {
 		/*1.pwm num; 2. period in ns; */
 		/*3.plarity, 0: high active, 1: low active*/
-		backlight_en_gpios = <&gpio 124 0>; /*GPIOD28*/ 
+		backlight_en_gpios = <&gpio 22 0>; /*S500 GPIO*/ 
 		pwms = <&pwm 0 50000 1>;
 		total_steps = <1024>;
 		min_brightness = <120>;
