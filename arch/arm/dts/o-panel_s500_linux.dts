@@ -308,7 +308,7 @@
 
 		};
 		
-		dsi_mode:mode@1368x768p60 {
+		dsi_mode:mode@768x1368p60 {
 			refresh = <60>;
 			xres = <1368>;    // cannot set to 1366, it must a nultiple of 8,
 			yres = <768>;
@@ -372,11 +372,11 @@
 		/*1.pwm num; 2. period in ns; */
 		/*3.plarity, 0: high active, 1: low active*/
 		backlight_en_gpios = <&gpio 22 0>; /*S500 GPIO*/ 
-		pwms = <&pwm 0 50000 1>;
+		pwms = <&pwm 0 50000 0>;
 		total_steps = <1024>;
-		min_brightness = <120>;
-		max_brightness = <450>;
-		dft_brightness = <300>;
+		min_brightness = <124>;
+		max_brightness = <1024>;
+		dft_brightness = <524>;
 		delay_bf_pwm  = <200>;
 		delay_af_pwm  = <10>;	
 	};
