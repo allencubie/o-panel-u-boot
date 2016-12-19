@@ -253,7 +253,7 @@
 	};
 
 	mmc@b0234000 {
-		status = "okay";
+		status = "disabled";
 	};
 
 	mmc@b0238000 {
