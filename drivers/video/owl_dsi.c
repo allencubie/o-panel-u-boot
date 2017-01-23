@@ -387,7 +387,7 @@ void dsihw_send_long_packet(int data_type, int word_cnt, int * send_data, int tr
 	unsigned long *src_addr;
 	int  i;
 	int cnt = 100;
-	printf("send long start\n");
+	//printf("send long start\n");
 	tmp = readl(DSI_CTRL);
 	tmp &= 0xffffefff;
 	writel(tmp, DSI_CTRL);	
@@ -423,7 +423,7 @@ void dsihw_send_long_packet(int data_type, int word_cnt, int * send_data, int tr
 		udelay(1);
 
 	writel(0x80000, DSI_TR_STA);
-	printf("send long end\n");
+	//printf("send long end\n");
 
 		
 }
