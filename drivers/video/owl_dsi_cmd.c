@@ -87,7 +87,6 @@ void send_cmd(void)
 	send_long_cmd(pakg, 2);	
 	end_long_cmd();
 	
-*/	
 	//char [] = {};
     char a[] = {0xF0,0x55,0xAA,0x52,0x08,0x00 };
 	char b[] = {0xB2,0x25};
@@ -218,5 +217,6 @@ void send_cmd(void)
 	send_short_cmd(0x11);
 	mdelay(120);
 	send_short_cmd(0x29);
+*/	
 }
 
